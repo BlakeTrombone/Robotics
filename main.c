@@ -1,6 +1,7 @@
-#pragma config(Motor,  port2,           rightMotor,    tmotorNormal, openLoop, reversed)
-#pragma config(Motor,  port3,           leftMotor,     tmotorNormal, openLoop)
-#pragma config(Motor,  port6,           armMotor,      tmotorNormal, openLoop)
+#pragma config(Motor,  port2,           backleft,    tmotorNormal, openLoop)
+#pragma config(Motor,  port3,           frontleft,     tmotorNormal, openLoop)
+#pragma config(Motor,  port4,           backright,    tmotorNormal, openLoop, reversed)
+#pragma config(Motor,  port5,           frontright,     tmotorNormal, openLoop, reversed)
 
 /*----------------------------------------------------------------------------------------------------*\
 |*                           - Dual Joystick Control with Arm - 1 Remote -                            *|
