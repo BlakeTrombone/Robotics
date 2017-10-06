@@ -30,11 +30,14 @@ task main()
   while(1 == 1)
   {
     //Driving Motor Control
-    motor[leftMotor] = vexRT[Ch3] / 2;
-    motor[rightMotor] = vexRT[Ch2] / 2;
+    motor[frontleft] = vexRT[Ch3] / 2;
+    motor[frontright] = vexRT[Ch2] / 2;
+	motor[backleft] = vexRT[Ch3] / 2;
+    motor[backright] = vexRT[Ch2] / 2;
 
     //Arm Control
-    if(vexRT[Btn6U] == 1)
+    /*
+	if(vexRT[Btn6U] == 1)
     {
       motor[armMotor] = 40;
     }
@@ -47,5 +50,6 @@ task main()
       motor[armMotor] = 0;
     }
   }
+  */
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
