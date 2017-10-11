@@ -9,7 +9,6 @@ task main()
 {
   while(1 == 1)
   {
-
     motor[frontleft] = vexRT[Ch3] / 2;
     motor[frontright] = vexRT[Ch2] / 2;
 	motor[backleft] = vexRT[Ch3] / 2;
