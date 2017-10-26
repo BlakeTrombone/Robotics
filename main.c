@@ -140,16 +140,19 @@ void spin(int degrees, int speed)
 task main ()
 {
 	clear();
-	//autonomous
+
+	clearTimer(T1);//start auto timer
+	while(time1[T1] < 15000)//run auto for 15 seconds
+	{
+
+//auto code goes here
 
 
 
 
 
-
-
-
-  while(1 == 1)
+	}//auto end
+  while(1 == 1)//manual begin
   {
     motor[left]  = (vexRT[Ch2] + vexRT[Ch1])/2;
     motor[right] = (vexRT[Ch2] - vexRT[Ch1])/2;
