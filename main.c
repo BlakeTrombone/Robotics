@@ -95,7 +95,7 @@ void turn(int degrees)
 void turn(int degrees, int speed)
 {
 	clear();//clears encoders for accurate measurments
-	int cos = ((degrees/360) * D / PI)/(5*PI); //REPLACE D WITH ROBOT WIDTH (DIAMETER)          convert degrees to turn into degrees per wheel
+	int cos = ((degrees/360) * 0 / PI)/(5*PI); //REPLACE D WITH ROBOT WIDTH (DIAMETER)          convert degrees to turn into degrees per wheel
 	if (degrees < 0) //if it needs to turn counter-clockwise...
 		while ((SensorValue[fleft]+SensorValue[bleft])/2-(SensorValue[fright]+SensorValue[bright])/2<cos) //if the difference is less than the required...
 		{
