@@ -51,7 +51,7 @@ void drive(int distance)
 void turn(int degrees)
 {
 	clear();//clears encoders for accurate measurments
-	int cos = ((degrees/360) * D / PI)/(5*PI); //REPLACE D WITH ROBOT WIDTH (DIAMETER)          convert degrees to turn into degrees per wheel
+	int cos = ((degrees/360) * 0 / PI)/(5*PI); //REPLACE D WITH ROBOT WIDTH (DIAMETER)          convert degrees to turn into degrees per wheel
 	if (degrees < 0) //if it needs to turn counter-clockwise...
 		while ((SensorValue[fleft]+SensorValue[bleft])/2-(SensorValue[fright]+SensorValue[bright])/2<cos) //if the difference is less than the required...
 		{
@@ -98,28 +98,17 @@ task main ()
     motor[right] = (vexRT[Ch2] - vexRT[Ch1])/2;
     motor[spinner] = vexRT[Ch4];
     motor[arm] = vexRT[Ch3];
-    if (vexRT[Btn5D]==1)
-    	motor[back] = -127;
-    else motor[back] = 0;
 
-    if (vexRT[Btn5U]==1)
-    	motor[back] = 127;
-    else motor[back] = 0;
+   	motor[back] = -127*vexRT[Btn5D];
 
-    if (vexRT[Btn6U]==1)
-    	motor[claw] = 127;
-    else motor[claw] = 0;
+    motor[back] = 127*vexRT[Btn5U];
 
-    if (vexRT[Btn6D]==1)
-    	motor[claw] = -127;
-    else motor[claw] = 0;
+    motor[claw] = 127*vexRT[Btn6U];
 
-    if (vexRT[Btn7U]==1)
-    	motor[push] = 127;
-    else motor[push] = 0;
+    motor[claw] = -127*vexRT[Btn6D];
 
-    if (vexRT[Btn7D]==1)
-    	motor[push] = -127;
-    else motor[push] = 0;
+   	motor[push] = 127*vexRT[Btn7U];
+
+    motor[push] = -127*vexRT[Btn7D];
   }
 }
