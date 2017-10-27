@@ -43,8 +43,31 @@ void drive(int distance)
 		  else motor[right] = motor[right] + 5;//if the right motor isn't running full speed, raise it up a notch.
 
 	}
-	motor[left] = 0;
-	motor[right] = 0;
+	motor[left] = 0;//stop motors
+	motor[right] = 0;//stop motors
+}
+void drive(int distance, int speed)
+{
+	clear(); //clears encoders for accurate measurments
+	int dist = distance / 5*PI; //finds the distance from degrees for the wheels
+	while ((((SensorValue[fleft]+SensorValue[fright])/2)+((SensorValue[fleft]+SensorValue[fright])/2))/2< dist)//while the sensors have a lower value than the distance
+	{
+		motor[left] = speed;//left motors param speed forward
+		motor[right] = speed;// right motors param speed forward
+
+		if ((SensorValue[fleft] + SensorValue[bleft])/2<(SensorValue[fright]+SensorValue[bright])/2)//if the average left encoders are less than the average of the right encoders...
+			if (motor[left]>=123)//... and the left motor is running full speed...
+				motor[right] = motor[right] - 5;//... lower the right motor speed
+		  else motor[left] = motor[left] + 5;//if the left motor isn't running full speed, raise it up a notch.
+
+		if ((SensorValue[fleft] + SensorValue[bleft])/2>(SensorValue[fright]+SensorValue[bright])/2)//if the average right encoders are less than the average of the left encoders...
+			if (motor[right]>=123)//... and the right motor is running full speed...
+				motor[left] = motor[left] - 5;//... lower the left motor speed
+		  else motor[right] = motor[right] + 5;//if the right motor isn't running full speed, raise it up a notch.
+
+	}
+	motor[left] = 0;//stop motors
+	motor[right] = 0;//stop motors
 }
 
 
@@ -65,6 +88,29 @@ void turn(int degrees)
 			motor[left] = 127;//left motor full speed ahead
 			motor[right] = -127;//right motor full speed backwards
 		}
+	motor[left] = 0;//stop motors
+	motor[right] = 0;//stop motors
+}
+
+void turn(int degrees, int speed)
+{
+	clear();//clears encoders for accurate measurments
+	int cos = ((degrees/360) * D / PI)/(5*PI); //REPLACE D WITH ROBOT WIDTH (DIAMETER)          convert degrees to turn into degrees per wheel
+	if (degrees < 0) //if it needs to turn counter-clockwise...
+		while ((SensorValue[fleft]+SensorValue[bleft])/2-(SensorValue[fright]+SensorValue[bright])/2<cos) //if the difference is less than the required...
+		{
+			motor[left] = -speed; // left motor param speed backwards
+			motor[right] = speed;//right motor param speed ahead
+		}
+
+	if (degrees > 0) // if it needs to spin clockwise
+		while ((SensorValue[fleft]+SensorValue[bleft])/2-(SensorValue[fright]+SensorValue[bright])/2>cos)//if the difference is less than required
+		{
+			motor[left] = speed;//left motor param speed ahead
+			motor[right] = -speed;//right motor param speed backwards
+		}
+	motor[left] = 0;//stop motors
+	motor[right] = 0;//stop motors
 }
 
 void spin(int degrees)
@@ -72,27 +118,41 @@ void spin(int degrees)
 	clear();//clears encoders for accurate measurments
 	if (degrees < 0)// if it needs to spin counter-clockwise...
 		while (degrees <SensorValue[spinner])//while the degrees are less than required
-			motor[spinner] = -127;//spin backwards
+			motor[spinner] = -127;//spin backwards full speed
 	if (degrees > 0)//if it needs to spin clockwise...
 		while (degrees > SensorValue[spinner])//while the degrees are less than required...
-			motor[spinner] = 127;//spin forwards
+			motor[spinner] = 127;//spin forwards full speed
+	motor[spinner] = 0;//stop motor
 }
 
-
+void spin(int degrees, int speed)
+{
+	clear();//clears encoders for accurate measurments
+	if (degrees < 0)// if it needs to spin counter-clockwise...
+		while (degrees <SensorValue[spinner])//while the degrees are less than required
+			motor[spinner] = -speed;//spin backwards at speed defined in parameter
+	if (degrees > 0)//if it needs to spin clockwise...
+		while (degrees > SensorValue[spinner])//while the degrees are less than required...
+			motor[spinner] = speed;//spin forwards at speed defined in parameter
+	motor[spinner] = 0;//stop motor
+}
 
 task main ()
 {
 	clear();
-	//autonomous
+
+	clearTimer(T1);//start auto timer
+	while(time1[T1] < 15000)//run auto for 15 seconds
+	{
+
+//auto code goes here
 
 
 
 
 
-
-
-
-  while(1 == 1)
+	}//auto end
+  while(1 == 1)//manual begin
   {
     motor[left]  = (vexRT[Ch2] + vexRT[Ch1])/2;
     motor[right] = (vexRT[Ch2] - vexRT[Ch1])/2;
