@@ -167,8 +167,8 @@ task main ()
 
     motor[claw] = -127*vexRT[Btn6D];
 
-   	motor[push] = 127*vexRT[Btn7U];
+   	motor[push] = 95*vexRT[Btn7U];
 
-    motor[push] = -127*vexRT[Btn7D];
+    motor[push] = -95*vexRT[Btn7D];
   }
 }
