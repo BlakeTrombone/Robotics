@@ -14,6 +14,7 @@
 #pragma config(Motor,  port9,           arm,           tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port10,          back,          tmotorVex393_HBridge, openLoop)
 
+
 void clear() //clears encoders
 {
 	SensorValue[fleft] = 0;
