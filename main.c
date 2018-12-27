@@ -26,14 +26,47 @@ task main()
     motor[fLeftMotor]  = vexRT[Ch3];
     motor[fRightMotor] = VexRT[Ch2];
 
-    motor[armLeftMotor]=(vexRT[Btn5UXmrt2]-vexRT[Btn5DXmrt2])*65;//5
-    motor[armRightMotor]=(vexRT[Btn5UXmrt2]-vexRT[Btn5DXmrt2])*65;//5
+    motor[armLeftMotor]=(vexRT[Btn5UXmrt2]-vexRT[Btn5DXmrt2])*65;
+    motor[armRightMotor]=(vexRT[Btn5UXmrt2]-vexRT[Btn5DXmrt2])*65;
     motor[suckerMotor]=127;
-    motor[handMotor]=vexRT[Ch4Xmrt2];//left joystick
+    motor[handMotor]=vexRT[Ch4Xmrt2];
 
     motor[lifterMotor]=(vexRT[Btn6UXmrt2]-vexRT[Btn6DXmrt2])*127;
     motor[pinballMotor]=vexRT[Ch2Xmrt2];
-//lifter 6
-//pinball joystick
   }
 }
+
+/*  THIS IS JUST IN CASE THE OTHER CODE DOESN'T WORK
+task main()
+{
+  while(true){
+    motor[bLeftMotor]  = (vexRT[Ch2] + vexRT[Ch1])/2;  // (y + x)/2
+    motor[bRightMotor] = (vexRT[Ch2] - vexRT[Ch1])/2;  // (y - x)/2
+    motor[fLeftMotor]  = (vexRT[Ch2] + vexRT[Ch1])/2;  // (y + x)/2
+    motor[fRightMotor] = (vexRT[Ch2] - vexRT[Ch1])/2;  // (y - x)/2
+
+    motor[armLeftMotor]=vexRT[Ch3];
+    motor[armRightMotor]=vexRT[Ch3];
+    motor[suckerMotor]=127;
+    motor[handMotor]=vexRT[Ch4];
+    if (vexRT[Btn7L])
+    {
+       clearTimer(T1);
+    	 motor[lifterMotor]=127;
+    }
+    if(time10[T1]>=1000 && time10[T1]<=1050)
+    {
+        motor[lifterMotor]=0;
+        motor[pinballMotor]=127;
+    }
+
+    if(time10[T1]>=2000 && time10[T1]<=2050)
+    {
+        motor[pinballMotor]=0;
+        motor[lifterMotor]=-127;
+    }
+
+    if(time10[T1]>=3000 && time10[T1]<=3050)
+        motor[lifterMotor]=0;
+  }
+*/
