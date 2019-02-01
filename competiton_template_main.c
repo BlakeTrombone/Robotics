@@ -74,12 +74,12 @@ task autonomous()
 		if (left)//auto code for if you're on the left square
 		{
 			motor[armLeftMotor] = motor[armRightMotor] = 127;//begin lifting arm up
-   	  wait1Msec(500);//modify to proper height for flag
+   	  wait1Msec(500);//modify to proper height for flag                          ADJUST!!!
 	 	  motor[armLeftMotor]=motor[armRightMotor]=0;//stop lifting arm
 			motor[bRightMotor]=motor[fRightMotor]=127;//turn left
-			wait1Msec(500);//adjust for when robot is facing left
+			wait1Msec(500);//adjust for when robot is facing left                      ADJUST!!!
       motor[bLeftMotor]=motor[fLeftMotor]=127;//start going straight
-			wait1Msec(5000);
+			wait1Msec(5000);//go straight until flag is poked                          ADJUST!!!
 			motor[bLeftMotor]=motor[fLeftMotor]=0;//stop left motors
 			motor[bRightMotor]=motor[fRightMotor]=0;//stop right motors
 		}
@@ -87,17 +87,17 @@ task autonomous()
 		if (right)//auto code for if you're on the right square
 		{
 			motor[bLeftMotor]=motor[fLeftMotor]=127;//start turning right
-			wait1Msec(500);//wait until turned right
+			wait1Msec(500);//wait until turned right                                    ADJUST!!!
 			motor[bRightMotor]=motor[fRightMotor]=127;//go straight
-			wait1Msec(1000);//go until you need to turn left for cap
+			wait1Msec(1000);//go until you need to turn left for cap                    ADJUST!!!
 			motor[fLeftMotor]=motor[bLeftMotor]=0;//turn left for cap
-			wait1Msec(500);//wait until facing left for cap
+			wait1Msec(500);//wait until facing left for cap                             ADJUST!!!
 			motor[fLeftMotor]=motor[bLeftMotor]=127;//
-			wait1Msec(3000);//approach cap
+			wait1Msec(3000);//approach cap                                              ADJUST!!!
 			motor[bRightMotor]=motor[fRightMotor]=0;//stop when cap is approached
 			motor[bLeftMotor]=motor[fLeftMotor]=0;//stop when cap is approaced
 			motor[armLeftMotor] = motor[armRightMotor] = 127;//begin lifting arm up to flip cap
-   	  wait1Msec(500);//wait for cap to flip
+   	  wait1Msec(500);//wait for cap to flip                                       ADJUST!!!
 	 	  motor[armLeftMotor]=motor[armRightMotor]=0;//stop lifting arm when cap is flipped
 
 		}
@@ -161,19 +161,19 @@ task usercontrol()
        clearTimer(T1);
     	 motor[lifterMotor]=127;
     }
-    if(time10[T1]>=1000 && time10[T1]<=1050)
+    if(time10[T1]>=1000 && time10[T1]<=1050)//                                      ADJUST!!!
     {
         motor[lifterMotor]=0;
         motor[pinballMotor]=127;
     }
 
-    if(time10[T1]>=2000 && time10[T1]<=2050)
+    if(time10[T1]>=2000 && time10[T1]<=2050)//                                      ADJUST!!!
     {
         motor[pinballMotor]=0;
         motor[lifterMotor]=-127;
     }
 
-    if(time10[T1]>=3000 && time10[T1]<=3050)
+    if(time10[T1]>=3000 && time10[T1]<=3050)//                                      ADJUST!!!
         motor[lifterMotor]=0;
 */
   }
