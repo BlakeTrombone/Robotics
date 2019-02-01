@@ -68,7 +68,7 @@ task autonomous()
 {
   // ..........................................................................
   // Insert user code here.
-		bool left = true;//are you on the left square or the right square?
+		bool left = true;//are you on the left square or the right square?           ADJUST!!!
 		bool right=!left;//this is just to make the code more human friendly
 
 		if (left)//auto code for if you're on the left square
