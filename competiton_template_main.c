@@ -45,10 +45,6 @@ void pre_auton()
   // manage all user created tasks if set to false.
   bStopTasksBetweenModes = true;
 
-  motor[armLeftMotor] = motor[armRightMotor] = 127;
-  wait1Msec(500);
-  motor[armLeftMotor]=motor[armRightMotor]=0;
-
 	// Set bDisplayCompetitionStatusOnLcd to false if you don't want the LCD
 	// used by the competition include file, for example, you might want
 	// to display your team name on the LCD in this function.
