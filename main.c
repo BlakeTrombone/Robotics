@@ -16,7 +16,8 @@
 
 //http://www.robotc.net/wikiarchive/VEX2_Functions_Remote_Control_-_VEXnet link to explain multiple remotes
 
-
+//THIS CODE IS DEPRECIATED!!!!!!! PLEASE SEE "competition_template_main.c"
+/*
 task main()
 {
   while(true){
