@@ -90,10 +90,19 @@ task autonomous()
 
 		if (right)//auto code for if you're on the right square
 		{
-
-
-
-
+			motor[bLeftMotor]=motor[fLeftMotor]=127;//start turning right
+			wait1Msec(500);//wait until turned right
+			motor[bRightMotor]=motor[fRightMotor]=127;//go straight
+			wait1Msec(1000);//go until you need to turn left for cap
+			motor[fLeftMotor]=motor[bLeftMotor]=0;//turn left for cap
+			wait1Msec(500);//wait until facing left for cap
+			motor[fLeftMotor]=motor[bLeftMotor]=127;//
+			wait1Msec(3000);//approach cap
+			motor[bRightMotor]=motor[fRightMotor]=0;//stop when cap is approached
+			motor[bLeftMotor]=motor[fLeftMotor]=0;//stop when cap is approaced
+			motor[armLeftMotor] = motor[armRightMotor] = 127;//begin lifting arm up to flip cap
+   	  wait1Msec(500);//wait for cap to flip
+	 	  motor[armLeftMotor]=motor[armRightMotor]=0;//stop lifting arm when cap is flipped
 
 		}
 
