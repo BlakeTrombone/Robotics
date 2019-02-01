@@ -72,17 +72,23 @@ task autonomous()
 {
   // ..........................................................................
   // Insert user code here.
-		bool left = true;
-		bool right=!left;
-		if (left)
-		{
-			motor[bRightMotor]=motor[fRightMotor]=127;
-			wait1Msec(500);
-      motor[bLeftMotor]=motor[fLeftMotor]=127;
+		bool left = true;//are you on the left square or the right square?
+		bool right=!left;//this is just to make the code more human friendly
 
+		if (left)//auto code for if you're on the left square
+		{
+			motor[armLeftMotor] = motor[armRightMotor] = 127;//begin lifting arm up
+   	  wait1Msec(500);//modify to proper height for flag
+	 	  motor[armLeftMotor]=motor[armRightMotor]=0;//stop lifting arm
+			motor[bRightMotor]=motor[fRightMotor]=127;//turn left
+			wait1Msec(500);//adjust for when robot is facing left
+      motor[bLeftMotor]=motor[fLeftMotor]=127;//start going straight
+			wait1Msec(5000);
+			motor[bLeftMotor]=motor[fLeftMotor]=0;//stop left motors
+			motor[bRightMotor]=motor[fRightMotor]=0;//stop right motors
 		}
 
-		if (right)
+		if (right)//auto code for if you're on the right square
 		{
 
 
