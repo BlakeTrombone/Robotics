@@ -113,5 +113,38 @@ task usercontrol()
 
     motor[lifterMotor]=(vexRT[Btn6UXmtr2]-vexRT[Btn6DXmtr2])*127;
     motor[pinballMotor]=vexRT[Ch2Xmtr2];
+
+
+
+    /*  THIS IS JUST IN CASE THE OTHER CODE DOESN'T WORK
+    motor[bLeftMotor]  = (vexRT[Ch2] + vexRT[Ch1])/2;  // (y + x)/2
+    motor[bRightMotor] = (vexRT[Ch2] - vexRT[Ch1])/2;  // (y - x)/2
+    motor[fLeftMotor]  = (vexRT[Ch2] + vexRT[Ch1])/2;  // (y + x)/2
+    motor[fRightMotor] = (vexRT[Ch2] - vexRT[Ch1])/2;  // (y - x)/2
+
+    motor[armLeftMotor]=vexRT[Ch3];
+    motor[armRightMotor]=vexRT[Ch3];
+    motor[suckerMotor]=127;
+    motor[handMotor]=vexRT[Ch4];
+    if (vexRT[Btn7L])
+    {
+       clearTimer(T1);
+    	 motor[lifterMotor]=127;
+    }
+    if(time10[T1]>=1000 && time10[T1]<=1050)
+    {
+        motor[lifterMotor]=0;
+        motor[pinballMotor]=127;
+    }
+
+    if(time10[T1]>=2000 && time10[T1]<=2050)
+    {
+        motor[pinballMotor]=0;
+        motor[lifterMotor]=-127;
+    }
+
+    if(time10[T1]>=3000 && time10[T1]<=3050)
+        motor[lifterMotor]=0;
+*/
   }
 }
