@@ -25,4 +25,16 @@ task main()
 		avoid();//will make the robot avoid collisions
 		remote();//will check remote control for instructions
 	}
+
+	void wander()
+	{
+	}
+
+	void avoid()
+	{
+	}
+
+	void remote()
+	{
+	}
 }
