@@ -10,10 +10,19 @@ task main()
 	SensorValue[eleft] = 0;
   SensorValue[eright] = 0;
   motor[hud]=-75;
-	motor[hlr]=-127;
+	motor[hlr]=-120;
 	int leftGround=SensorValue[head];
-	motor[hlr]=
+	motor[hlr]=120;
+	int rightGround=SensorValue[head];
+	motor[hlr]=0;
+	int ground=SensorValue[head];
 
 
 
+	while(true)
+	{
+		wander();//will make the robot randomly wander around if certain conditions are met
+		avoid();//will make the robot avoid collisions
+		remote();//will check remote control for instructions
+	}
 }
