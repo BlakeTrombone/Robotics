@@ -26,6 +26,7 @@ vex::motor        suckLeft(PORT5, gearSetting::ratio18_1, false);
 vex::motor        suckRight(PORT6, gearSetting::ratio18_1, false);
 
 vex::motor        lean(PORT7, gearSetting::ratio18_1, false);
+
 vex::controller   Controller1 = vex::controller();
 
 /*---------------------------------------------------------------------------*/
@@ -112,7 +113,7 @@ int main() {
       suckLeft.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR2.pressing()), vex::velocityUnits::pct);
       suckRight.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR2.pressing()), vex::velocityUnits::pct);
 
-
+      lean.spin(vex::directionType::fwd, (100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL2.pressing()), vex::velocityUnits::pct);
     }    
        
 }
