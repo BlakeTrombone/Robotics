@@ -18,10 +18,13 @@ vex::competition Competition;
 // define your global instances of motors and other devices here
 vex::motor        driveLeft(PORT1, gearSetting::ratio18_1, false);
 vex::motor        driveRight(PORT2, gearSetting::ratio18_1, false);
+
 vex::motor        armLeft(PORT3, gearSetting::ratio18_1, false);
 vex::motor        armRight(PORT4, gearSetting::ratio18_1, false);
+
 vex::motor        suckLeft(PORT5, gearSetting::ratio18_1, false);
 vex::motor        suckRight(PORT6, gearSetting::ratio18_1, false);
+
 vex::motor        lean(PORT7, gearSetting::ratio18_1, false);
 vex::controller   Controller1 = vex::controller();
 
@@ -100,8 +103,11 @@ int main() {
     //Prevent main from exiting with an infinite loop.                        
     while(1) {
       vex::task::sleep(100);//Sleep the task for a short amount of time to prevent wasted resources.
-        LeftMotor.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
-        RightMotor.spin(vex::directionType::fwd, Controller1.Axis2.position(), vex::velocityUnits::pct);
+      driveLeft.spin(vex::directionType::fwd, (Controller1.Axis2.position() + Controller1.Axis1.position())/2, vex::velocityUnits::pct); 
+      driveRight.spin(vex::directionType::fwd, (Controller1.Axis2.position() - Controller1.Axis1.position())/2, vex::velocityUnits::pct);
+
+      armLeft.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
+      armRight.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
     }    
        
 }
