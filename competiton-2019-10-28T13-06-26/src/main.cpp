@@ -108,6 +108,11 @@ int main() {
 
       armLeft.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
       armRight.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
+
+      suckLeft.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR2.pressing()), vex::velocityUnits::pct);
+      suckRight.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR2.pressing()), vex::velocityUnits::pct);
+
+
     }    
        
 }
