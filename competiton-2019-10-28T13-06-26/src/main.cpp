@@ -85,16 +85,16 @@ void usercontrol( void ) {
     // Insert user code here. This is where you use the joystick values to 
     // update your motors, etc.
     // ........................................................................
-       driveLeft.spin(vex::directionType::fwd, (Controller1.Axis2.position() + Controller1.Axis1.position())/2, vex::velocityUnits::pct); 
-      driveRight.spin(vex::directionType::fwd, (Controller1.Axis2.position() - Controller1.Axis1.position())/2, vex::velocityUnits::pct);
+    driveLeft.spin(vex::directionType::fwd, (Controller1.Axis2.position() + Controller1.Axis1.position())/2, vex::velocityUnits::pct); 
+    driveRight.spin(vex::directionType::fwd, (Controller1.Axis2.position() - Controller1.Axis1.position())/2, vex::velocityUnits::pct);
 
-      armLeft.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
-      armRight.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
+    armLeft.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
+    armRight.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
 
-      suckLeft.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
-      suckRight.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
+    suckLeft.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
+    suckRight.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
 
-      lean.spin(vex::directionType::fwd, (100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing()), vex::velocityUnits::pct);
+    lean.spin(vex::directionType::fwd, (100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing()), vex::velocityUnits::pct);
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
 }
@@ -113,7 +113,6 @@ int main() {
     //Prevent main from exiting with an infinite loop.                        
     while(1) {
       vex::task::sleep(100);//Sleep the task for a short amount of time to prevent wasted resources.
-      
     }    
        
 }
