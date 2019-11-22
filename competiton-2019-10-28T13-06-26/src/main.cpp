@@ -16,14 +16,14 @@ vex::brain       Brain;
 vex::competition Competition;
 
 // define your global instances of motors and other devices here
-vex::motor        driveLeft(PORT1, gearSetting::ratio18_1, false);
+vex::motor        driveLeft(PORT1, gearSetting::ratio18_1, true);
 vex::motor        driveRight(PORT2, gearSetting::ratio18_1, false);
 
 vex::motor        armLeft(PORT3, gearSetting::ratio18_1, false);
-vex::motor        armRight(PORT4, gearSetting::ratio18_1, false);
+vex::motor        armRight(PORT4, gearSetting::ratio18_1, true);
 
 vex::motor        suckLeft(PORT5, gearSetting::ratio18_1, false);
-vex::motor        suckRight(PORT6, gearSetting::ratio18_1, false);
+vex::motor        suckRight(PORT6, gearSetting::ratio18_1, true);
 
 vex::motor        lean(PORT7, gearSetting::ratio18_1, false);
 
