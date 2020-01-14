@@ -27,8 +27,8 @@ vex::motor        suckRight(PORT6, gearSetting::ratio18_1, true);
 
 vex::motor        lean(PORT7, gearSetting::ratio18_1, false);
 
-vex::controller   Controller1 = vex::controller();
-vex::controller   Controller2 = vex::controller();
+vex::controller   Controller1(vex::controllerType::primary);
+vex::controller   Controller2(vex::controllerType::partner);
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -86,30 +86,30 @@ void usercontrol( void ) {
     // Insert user code here. This is where you use the joystick values to 
     // update your motors, etc.
     // ........................................................................
-    if (1)//1 for one remote, 0 for 2 remotes
+    if (0)//1 for one remote, 0 for 2 remotes
     {
       driveLeft.spin(vex::directionType::fwd, (Controller1.Axis2.position() + Controller1.Axis1.position())/2, vex::velocityUnits::pct); 
       driveRight.spin(vex::directionType::fwd, (Controller1.Axis2.position() - Controller1.Axis1.position())/2, vex::velocityUnits::pct);
 
-      armLeft.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
-      armRight.spin(vex::directionType::fwd, Controller1.Axis3.position(), vex::velocityUnits::pct);
+      armLeft.spin(vex::directionType::fwd, .2*Controller1.Axis3.position(), vex::velocityUnits::pct);
+      armRight.spin(vex::directionType::fwd, .2*Controller1.Axis3.position(), vex::velocityUnits::pct);
 
       suckLeft.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
       suckRight.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
 
-      lean.spin(vex::directionType::fwd, (100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing()), vex::velocityUnits::pct);
+      lean.spin(vex::directionType::fwd, .5*((100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing())), vex::velocityUnits::pct);
       vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
     } else {
       driveLeft.spin(vex::directionType::fwd,Controller1.Axis3.position(), vex::velocityUnits::pct); 
       driveRight.spin(vex::directionType::fwd,Controller1.Axis2.position(), vex::velocityUnits::pct);
 
-      armLeft.spin(vex::directionType::fwd, Controller2.Axis3.position(), vex::velocityUnits::pct);
-      armRight.spin(vex::directionType::fwd, Controller2.Axis3.position(), vex::velocityUnits::pct);
+      armLeft.spin(vex::directionType::fwd, .2*Controller2.Axis3.position(), vex::velocityUnits::pct);
+      armRight.spin(vex::directionType::fwd, .2*Controller2.Axis3.position(), vex::velocityUnits::pct);
 
       suckLeft.spin(vex::directionType::fwd,Controller2.Axis2.position() , vex::velocityUnits::pct);
       suckRight.spin(vex::directionType::fwd,Controller2.Axis2.position(), vex::velocityUnits::pct);
 
-      lean.spin(vex::directionType::fwd, (100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing()), vex::velocityUnits::pct);
+      lean.spin(vex::directionType::fwd, .5*((100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing())), vex::velocityUnits::pct);
       vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
     }
   }
