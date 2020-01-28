@@ -76,8 +76,18 @@ void autonomous( void ) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 void usercontrol( void ) {
-  armLeft.setRotation(0, vex::rotationUnits::deg);
-  armRight.setRotation(0, vex::rotationUnits::deg);
+  armLeft.setRotation(190, vex::rotationUnits::deg);
+  armRight.setRotation(190, vex::rotationUnits::deg);
+  suckLeft.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+  suckRight.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+  armLeft.startRotateTo(0, vex::rotationUnits::deg);
+  armRight.rotateTo(0, vex::rotationUnits::deg);
+  suckLeft.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+  suckRight.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+  
+  
+  armLeft.stop(vex::brakeType::hold);
+  armRight.stop(vex::brakeType::hold);
   // User control code here, inside the loop
   while (1) {
     // This is the main execution loop for the user control program.
@@ -88,8 +98,6 @@ void usercontrol( void ) {
     // Insert user code here. This is where you use the joystick values to 
     // update your motors, etc.
     // ........................................................................
-  armLeft.stop(vex::brakeType::hold);
-  armRight.stop(vex::brakeType::hold);
   
   driveLeft.spin(vex::directionType::fwd,Controller1.Axis3.position(), vex::velocityUnits::pct); 
   driveRight.spin(vex::directionType::fwd,Controller1.Axis2.position(), vex::velocityUnits::pct);
