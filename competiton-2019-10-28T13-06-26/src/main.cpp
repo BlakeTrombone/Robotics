@@ -16,14 +16,14 @@ vex::brain       Brain;
 vex::competition Competition;
 
 // define your global instances of motors and other devices here
-vex::motor        driveLeft(PORT1, gearSetting::ratio18_1, false);
-vex::motor        driveRight(PORT2, gearSetting::ratio18_1, true);
+vex::motor        driveLeft(PORT2, gearSetting::ratio18_1, false);
+vex::motor        driveRight(PORT1, gearSetting::ratio18_1, true);
 
-vex::motor        armLeft(PORT3, gearSetting::ratio18_1, false);
-vex::motor        armRight(PORT4, gearSetting::ratio18_1, true);
+vex::motor        armLeft(PORT4, gearSetting::ratio18_1, false);
+vex::motor        armRight(PORT3, gearSetting::ratio18_1, true);
 
-vex::motor        suckLeft(PORT5, gearSetting::ratio18_1, false);
-vex::motor        suckRight(PORT6, gearSetting::ratio18_1, true);
+vex::motor        suckLeft(PORT9, gearSetting::ratio18_1, true);
+vex::motor        suckRight(PORT5, gearSetting::ratio18_1, false);
 
 vex::motor        lean(PORT7, gearSetting::ratio18_1, false);
 
@@ -43,7 +43,8 @@ vex::controller   Controller2(vex::controllerType::partner);
 void pre_auton( void ) {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
-
+armLeft.setRotation(0, vex::rotationUnits::deg);
+armRight.setRotation(0, vex::rotationUnits::deg);
   
 }
 
@@ -74,8 +75,9 @@ void autonomous( void ) {
 /*                                                                           */
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
-
 void usercontrol( void ) {
+  armLeft.setRotation(0, vex::rotationUnits::deg);
+  armRight.setRotation(0, vex::rotationUnits::deg);
   // User control code here, inside the loop
   while (1) {
     // This is the main execution loop for the user control program.
@@ -86,32 +88,51 @@ void usercontrol( void ) {
     // Insert user code here. This is where you use the joystick values to 
     // update your motors, etc.
     // ........................................................................
-    if (0)//1 for one remote, 0 for 2 remotes
+  armLeft.stop(vex::brakeType::hold);
+  armRight.stop(vex::brakeType::hold);
+  
+  driveLeft.spin(vex::directionType::fwd,Controller1.Axis3.position(), vex::velocityUnits::pct); 
+  driveRight.spin(vex::directionType::fwd,Controller1.Axis2.position(), vex::velocityUnits::pct);
+
+    //armLeft.spin(vex::directionType::fwd, .2*Controller2.Axis3.position(), vex::velocityUnits::pct);
+    //armRight.spin(vex::directionType::fwd, .2*Controller2.Axis3.position(), vex::velocityUnits::pct);
+
+    //suckLeft.spin(vex::directionType::fwd,Controller2.Axis2.position() , vex::velocityUnits::pct);
+    //suckRight.spin(vex::directionType::fwd,Controller2.Axis2.position(), vex::velocityUnits::pct);
+
+  if (Controller1.ButtonA.pressing())
+  {
+    armLeft.stop(vex::brakeType::coast);
+    armRight.stop(vex::brakeType::coast);
+  }
+
+  if (Controller1.ButtonB.pressing())
     {
-      driveLeft.spin(vex::directionType::fwd, (Controller1.Axis2.position() + Controller1.Axis1.position())/2, vex::velocityUnits::pct); 
-      driveRight.spin(vex::directionType::fwd, (Controller1.Axis2.position() - Controller1.Axis1.position())/2, vex::velocityUnits::pct);
+      armLeft.startRotateTo(0, vex::rotationUnits::deg);
+      armRight.startRotateTo(0, vex::rotationUnits::deg);
 
-      armLeft.spin(vex::directionType::fwd, .2*Controller1.Axis3.position(), vex::velocityUnits::pct);
-      armRight.spin(vex::directionType::fwd, .2*Controller1.Axis3.position(), vex::velocityUnits::pct);
+      suckLeft.spin(vex::directionType::fwd, -100, vex::velocityUnits::pct);
+      suckRight.spin(vex::directionType::fwd, -100, vex::velocityUnits::pct);
+      vexDelay(500);
 
-      suckLeft.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
-      suckRight.spin(vex::directionType::fwd, (100*Controller1.ButtonR2.pressing())-(100*Controller1.ButtonR1.pressing()), vex::velocityUnits::pct);
+      armLeft.startRotateTo(-70, vex::rotationUnits::deg);
+      armRight.startRotateTo(-70, vex::rotationUnits::deg);
 
-      lean.spin(vex::directionType::fwd, .5*((100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing())), vex::velocityUnits::pct);
-      vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
-    } else {
-      driveLeft.spin(vex::directionType::fwd,Controller1.Axis3.position(), vex::velocityUnits::pct); 
-      driveRight.spin(vex::directionType::fwd,Controller1.Axis2.position(), vex::velocityUnits::pct);
+      vexDelay(2000);
 
-      armLeft.spin(vex::directionType::fwd, .2*Controller2.Axis3.position(), vex::velocityUnits::pct);
-      armRight.spin(vex::directionType::fwd, .2*Controller2.Axis3.position(), vex::velocityUnits::pct);
+      armLeft.startRotateTo(0, vex::rotationUnits::deg);
+      armRight.startRotateTo(0, vex::rotationUnits::deg);
 
-      suckLeft.spin(vex::directionType::fwd,Controller2.Axis2.position() , vex::velocityUnits::pct);
-      suckRight.spin(vex::directionType::fwd,Controller2.Axis2.position(), vex::velocityUnits::pct);
+      suckLeft.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+      suckRight.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
 
-      lean.spin(vex::directionType::fwd, .5*((100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing())), vex::velocityUnits::pct);
-      vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
+      vexDelay(1000);
+      armLeft.stop(vex::brakeType::hold);
+      armRight.stop(vex::brakeType::hold);
     }
+
+    lean.spin(vex::directionType::fwd, .5*((100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing())), vex::velocityUnits::pct);
+    vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
 }
 
@@ -132,3 +153,4 @@ int main() {
     }   
        
 }
+
