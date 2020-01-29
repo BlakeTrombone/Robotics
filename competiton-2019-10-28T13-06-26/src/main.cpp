@@ -25,10 +25,9 @@ vex::motor        armRight(PORT3, gearSetting::ratio18_1, true);
 vex::motor        suckLeft(PORT9, gearSetting::ratio18_1, true);
 vex::motor        suckRight(PORT5, gearSetting::ratio18_1, false);
 
-vex::motor        lean(PORT7, gearSetting::ratio18_1, false);
+vex::motor        lean(PORT8, gearSetting::ratio18_1, false);
 
 vex::controller   Controller1(vex::controllerType::primary);
-vex::controller   Controller2(vex::controllerType::partner);
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -43,8 +42,6 @@ vex::controller   Controller2(vex::controllerType::partner);
 void pre_auton( void ) {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
-armLeft.setRotation(0, vex::rotationUnits::deg);
-armRight.setRotation(0, vex::rotationUnits::deg);
   
 }
 
@@ -62,6 +59,7 @@ void autonomous( void ) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
+  /*
   armLeft.setRotation(190, vex::rotationUnits::deg);
   armRight.setRotation(190, vex::rotationUnits::deg);
   suckLeft.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
@@ -73,7 +71,7 @@ void autonomous( void ) {
   
   
   armLeft.stop(vex::brakeType::hold);
-  armRight.stop(vex::brakeType::hold);
+  armRight.stop(vex::brakeType::hold);*/
 
 }
 
@@ -88,6 +86,25 @@ void autonomous( void ) {
 /*---------------------------------------------------------------------------*/
 void usercontrol( void ) {
   // User control code here, inside the loop
+  { //auton
+    armLeft.setRotation(370, vex::rotationUnits::deg);
+    armRight.setRotation(370, vex::rotationUnits::deg);
+    lean.setRotation(20, vex::rotationUnits::deg);
+    suckRight.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+    suckLeft.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+    armLeft.startRotateTo(0, vex::rotationUnits::deg);
+    armRight.startRotateTo(0, vex::rotationUnits::deg);
+    suckLeft.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+    suckRight.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+    
+    while (!(armLeft.position(vex::rotationUnits::deg)==0 && armRight.position(vex::rotationUnits::deg)==0) && !Controller1.ButtonX.pressing())
+    {
+      vexDelay(100);
+    }
+    armLeft.stop(vex::brakeType::hold);
+    armRight.stop(vex::brakeType::hold);
+  }
+
   while (1) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo 
@@ -113,22 +130,30 @@ void usercontrol( void ) {
     armRight.stop(vex::brakeType::coast);
   }
 
+  if (Controller1.ButtonY.pressing())
+  {
+    lean.rotateTo(-450, vex::rotationUnits::deg);
+    lean.startRotateTo(0, vex::rotationUnits::deg);
+  }
+
   if (Controller1.ButtonB.pressing())
     {
       armLeft.startRotateTo(0, vex::rotationUnits::deg);
       armRight.startRotateTo(0, vex::rotationUnits::deg);
 
-      suckLeft.spin(vex::directionType::fwd, -100, vex::velocityUnits::pct);
-      suckRight.spin(vex::directionType::fwd, -100, vex::velocityUnits::pct);
+      suckLeft.spin(vex::directionType::fwd, -75, vex::velocityUnits::pct);
+      suckRight.spin(vex::directionType::fwd, -75, vex::velocityUnits::pct);
       vexDelay(500);
 
       armLeft.startRotateTo(-70, vex::rotationUnits::deg);
       armRight.startRotateTo(-70, vex::rotationUnits::deg);
+      lean.startRotateTo(-400, vex::rotationUnits::deg);
 
       vexDelay(2000);
 
       armLeft.startRotateTo(0, vex::rotationUnits::deg);
       armRight.startRotateTo(0, vex::rotationUnits::deg);
+      lean.startRotateTo(0, vex::rotationUnits::deg);
 
       suckLeft.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
       suckRight.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
@@ -138,7 +163,7 @@ void usercontrol( void ) {
       armRight.stop(vex::brakeType::hold);
     }
 
-    lean.spin(vex::directionType::fwd, .5*((100*Controller1.ButtonL2.pressing())-(100*Controller1.ButtonL1.pressing())), vex::velocityUnits::pct);
+    lean.spin(vex::directionType::fwd, .5*((100*Controller1.ButtonL1.pressing())-(100*Controller1.ButtonL2.pressing())), vex::velocityUnits::pct);
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
 }
